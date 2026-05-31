@@ -1,0 +1,9 @@
+import {
+  BUTTON_VARIANT_DANGER,
+  BUTTON_VARIANT_PRIMARY,
+} from '../Button/Button.constants';
+
+export const CONFIRM_ALERT_CANCEL_VARIANT = BUTTON_VARIANT_PRIMARY;
+export const CONFIRM_ALERT_CONFIRM_VARIANT = BUTTON_VARIANT_DANGER;
+
+export const CONFIRM_ALERT_BUTTON_TYPE = 'button' as const;
