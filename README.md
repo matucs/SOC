@@ -13,6 +13,8 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
+**Live demo:** [https://matucs.github.io/SOC/](https://matucs.github.io/SOC/) (deployed via GitHub Pages on push to `master`).
+
 ---
 
 ## Tech Choices
