@@ -1,28 +1,24 @@
 import { create } from 'zustand';
-import type { SecurityEvent } from '../data/types';
 import { INITIAL_EVENTS } from '../data/mockEvents';
 import type { EventStore } from './eventStore.types';
-import { createEventId, prependEvent } from './eventStore.utils';
+import {
+  applyAddEvent,
+  applyUpdateEvent,
+  createInitialTimelineEvents,
+} from './eventStore.utils';
 
 export type { AddEventOptions, EventStore } from './eventStore.types';
 
 export const useEventStore = create<EventStore>((set) => ({
   gridEvents: INITIAL_EVENTS,
-  timelineEvents: INITIAL_EVENTS,
+  timelineEvents: createInitialTimelineEvents(INITIAL_EVENTS),
 
   addEvent: (eventData, options) => {
-    set((state) => {
-      const newEvent: SecurityEvent = {
-        ...eventData,
-        id: createEventId(state.gridEvents),
-      };
-      const gridEvents = prependEvent(state.gridEvents, newEvent);
+    set((state) => applyAddEvent(state, eventData, options));
+  },
 
-      return {
-        gridEvents,
-        ...(options?.refreshTimeline ? { timelineEvents: gridEvents } : {}),
-      };
-    });
+  updateEvent: (id, eventData, options) => {
+    set((state) => applyUpdateEvent(state, id, eventData, options));
   },
 
   syncTimeline: () =>

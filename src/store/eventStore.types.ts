@@ -12,6 +12,11 @@ export interface EventStoreState {
 
 export interface EventStoreActions {
   addEvent: (event: Omit<SecurityEvent, 'id'>, options?: AddEventOptions) => void;
+  updateEvent: (
+    id: string,
+    event: Omit<SecurityEvent, 'id'>,
+    options?: AddEventOptions,
+  ) => void;
   syncTimeline: () => void;
 }
 
