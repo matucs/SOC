@@ -14,6 +14,8 @@ export function DataGridTable<T extends object>({
   columnFilters,
   onSort,
   onFilter,
+  onRowActivate,
+  getRowAriaLabel,
 }: DataGridTableProps<T>) {
   const colCount = visibleColumns.length;
   const isLoading = status === DataGridStatus.Loading;
@@ -37,6 +39,8 @@ export function DataGridTable<T extends object>({
             <DataGridTableBody
               visibleColumns={visibleColumns}
               paginatedData={paginatedData}
+              onRowActivate={onRowActivate}
+              getRowAriaLabel={getRowAriaLabel}
             />
           )}
         </tbody>

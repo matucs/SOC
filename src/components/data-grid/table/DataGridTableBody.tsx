@@ -1,26 +1,23 @@
 import type { DataGridTableBodyProps } from '../types/DataGrid.types';
-import { bodyRowClass, bodyRowStyle, bodyCellClass } from '../styles/DataGridTable.styles';
+import { getDataGridRowKey } from '../utils/dataGridTableBody.utils';
+import { DataGridTableRow } from './dataGridTableRow';
 
 export function DataGridTableBody<T extends object>({
   visibleColumns,
   paginatedData,
+  onRowActivate,
+  getRowAriaLabel,
 }: DataGridTableBodyProps<T>) {
   return (
     <>
-      {paginatedData.map((row, ri) => (
-        <tr
-          key={String((row as { id?: string | number }).id ?? ri)}
-          className={bodyRowClass}
-          style={bodyRowStyle}
-        >
-          {visibleColumns.map((col) => (
-            <td key={String(col.accessor)} className={bodyCellClass}>
-              {col.render
-                ? col.render(row[col.accessor], row)
-                : String(row[col.accessor] ?? '')}
-            </td>
-          ))}
-        </tr>
+      {paginatedData.map((row, rowIndex) => (
+        <DataGridTableRow
+          key={getDataGridRowKey(row, rowIndex)}
+          row={row}
+          visibleColumns={visibleColumns}
+          onActivate={onRowActivate}
+          getAriaLabel={getRowAriaLabel}
+        />
       ))}
     </>
   );

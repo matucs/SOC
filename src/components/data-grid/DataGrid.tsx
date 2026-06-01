@@ -14,6 +14,8 @@ export const DataGrid = memo(function DataGrid<T extends object>({
   columns,
   status = DEFAULT_STATUS,
   errorMessage = DEFAULT_ERROR_MESSAGE,
+  onRowActivate,
+  getRowAriaLabel,
 }: DataGridProps<T>) {
   const {
     visibleColumns,
@@ -61,6 +63,8 @@ export const DataGrid = memo(function DataGrid<T extends object>({
         columnFilters={columnFilters}
         onSort={toggleSort}
         onFilter={setColumnFilter}
+        onRowActivate={onRowActivate}
+        getRowAriaLabel={getRowAriaLabel}
       />
 
       <DataGridPagination

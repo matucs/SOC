@@ -24,6 +24,8 @@ export interface DataGridProps<T extends object> {
   columns: ColumnDef<T>[];
   status?: DataGridStatus;
   errorMessage?: string;
+  onRowActivate?: (row: T) => void;
+  getRowAriaLabel?: (row: T) => string;
 }
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
@@ -54,6 +56,8 @@ export interface DataGridTableProps<T> {
   columnFilters: Record<string, string>;
   onSort: (accessor: keyof T) => void;
   onFilter: (accessor: keyof T, value: string) => void;
+  onRowActivate?: (row: T) => void;
+  getRowAriaLabel?: (row: T) => string;
 }
 
 export interface DataGridTableHeadProps<T> {
@@ -107,6 +111,15 @@ export interface FilterHeaderRowProps<T> {
 export interface DataGridTableBodyProps<T> {
   visibleColumns: ColumnDef<T>[];
   paginatedData: T[];
+  onRowActivate?: (row: T) => void;
+  getRowAriaLabel?: (row: T) => string;
+}
+
+export interface DataGridTableRowProps<T> {
+  row: T;
+  visibleColumns: ColumnDef<T>[];
+  onActivate?: (row: T) => void;
+  getAriaLabel?: (row: T) => string;
 }
 
 export interface DataGridTableSkeletonProps {

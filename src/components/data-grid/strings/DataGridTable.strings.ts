@@ -5,3 +5,4 @@ export const ariaFilterBy = (label: string) => `Filter by ${label}`;
 export const ARIA_SORT_ASC = 'ascending' as const;
 export const ARIA_SORT_DESC = 'descending' as const;
 export const ARIA_SORT_NONE = 'none' as const;
+export const ROW_ACTIVATE_ARIA_DEFAULT = 'Activate row';

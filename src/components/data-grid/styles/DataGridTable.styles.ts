@@ -15,6 +15,8 @@ export const filterRowClass = 'px-3 pb-2 pt-0';
 export const filterInputClass =
   'w-full text-xs px-2 py-1 rounded border bg-transparent text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors font-mono';
 export const bodyRowClass = 'border-b hover:bg-slate-800/20 transition-colors';
+export const bodyRowInteractiveClass =
+  'border-b hover:bg-slate-800/30 transition-colors cursor-pointer';
 export const bodyCellClass = 'px-3 py-2.5 text-xs text-slate-300';
 export const skeletonCellClass = 'px-3 py-3 border-b';
 export const skeletonBarClass = 'h-4 rounded animate-pulse';
