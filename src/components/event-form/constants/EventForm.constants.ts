@@ -20,10 +20,10 @@ export const EVENT_TYPES = EVENT_TYPE_VALUES.map((value) => ({
 }));
 
 export const SEVERITIES: { value: Severity; label: string }[] = [
-  { value: 'low',      label: 'Low'      },
-  { value: 'medium',   label: 'Medium'   },
-  { value: 'high',     label: 'High'     },
-  { value: 'critical', label: 'Critical' },
+  { value: 'low',      label: 'low'      },
+  { value: 'medium',   label: 'medium'   },
+  { value: 'high',     label: 'high'     },
+  { value: 'critical', label: 'critical' },
 ];
 
 export const STATUSES: { value: EventStatus; label: string }[] = [

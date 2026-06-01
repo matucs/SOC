@@ -21,6 +21,7 @@ export const liveLabelClass =
   'text-[10px] text-slate-500 font-mono uppercase tracking-wider live-label-blink';
 export const headerDividerClass = 'w-px h-4';
 export const newEventLabelClass = 'hidden sm:inline';
+export const newEventButtonClass = 'shrink-0 px-2.5 sm:px-3';
 
 export const headerStyle = {
   background: HEADER_BG,

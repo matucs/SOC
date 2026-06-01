@@ -18,33 +18,40 @@ export interface FormErrors {
 }
 
 export interface EventFormBodyProps {
+  initialValues: FormState;
   errors: FormErrors;
   defaultTimestamp: string;
   titleRef: React.RefObject<HTMLInputElement | null>;
   timestampRef: React.RefObject<HTMLInputElement | null>;
-  locationRef: React.RefObject<HTMLInputElement | null>;
+  locationRef: React.RefObject<HTMLSelectElement | null>;
   onDirty: () => void;
   onSubmit: (e: React.SyntheticEvent<HTMLFormElement>) => void;
   onClose: () => void;
+  submitLabel: string;
 }
 
 export interface TitleFieldProps {
+  defaultValue: string;
   error?: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
   onDirty: () => void;
 }
 
 export interface TypeAndSeverityFieldProps {
+  defaultType: FormState['type'];
+  defaultSeverity: FormState['severity'];
   onDirty: () => void;
 }
 
 export interface StatusFieldProps {
+  defaultStatus: FormState['status'];
   onDirty: () => void;
 }
 
 export interface LocationFieldProps {
+  defaultValue: string;
   error?: string;
-  inputRef: React.RefObject<HTMLInputElement | null>;
+  inputRef: React.RefObject<HTMLSelectElement | null>;
   onDirty: () => void;
 }
 
@@ -56,11 +63,13 @@ export interface TimestampFieldProps {
 }
 
 export interface DescriptionFieldProps {
+  defaultValue: string;
   onDirty: () => void;
 }
 
 export interface FormActionsProps {
   onClose: () => void;
+  submitLabel: string;
 }
 
 export interface UseEventFormReturn {
@@ -74,5 +83,5 @@ export interface UseEventFormReturn {
   reset: () => void;
   titleRef: React.RefObject<HTMLInputElement | null>;
   timestampRef: React.RefObject<HTMLInputElement | null>;
-  locationRef: React.RefObject<HTMLInputElement | null>;
+  locationRef: React.RefObject<HTMLSelectElement | null>;
 }

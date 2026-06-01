@@ -1,5 +1,6 @@
 // ── Modal ─────────────────────────────────────────────────────────────────────
-export const MODAL_TITLE = 'New Security Event';
+export const MODAL_TITLE_NEW = 'New Security Event';
+export const MODAL_TITLE_EDIT = 'Edit Security Event';
 export const DEFAULT_DESCRIPTION = 'Manually entered event.';
 
 // ── Discard prompt ──────────────────────────────────────────────────────────────

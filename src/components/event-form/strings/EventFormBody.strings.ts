@@ -11,4 +11,5 @@ export const PLACEHOLDER_LOCATION = 'e.g. Server Room B';
 export const PLACEHOLDER_DESCRIPTION = 'Optional notes…';
 
 export const BTN_CANCEL = 'Cancel';
-export const BTN_SUBMIT = 'Create Event';
+export const BTN_SUBMIT_CREATE = 'Create Event';
+export const BTN_SUBMIT_EDIT = 'Save Changes';

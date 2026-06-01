@@ -4,16 +4,18 @@ import { nowDateTimeLocal } from '../../ui/DateTimeInput/datetimeInput.utils';
 import { validate } from '../utils/eventForm.validate';
 import { parseFormData } from '../utils/eventForm.utils';
 
-export function useEventForm(): UseEventFormReturn {
+export function useEventForm(initialValues?: FormState): UseEventFormReturn {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formKey, setFormKey] = useState(0);
-  const [defaultTimestamp, setDefaultTimestamp] = useState(nowDateTimeLocal);
+  const [defaultTimestamp, setDefaultTimestamp] = useState(() =>
+    initialValues?.timestamp || nowDateTimeLocal(),
+  );
   const isDirtyRef = useRef(false);
 
   const titleRef = useRef<HTMLInputElement>(null);
   const timestampRef = useRef<HTMLInputElement>(null);
-  const locationRef = useRef<HTMLInputElement>(null);
+  const locationRef = useRef<HTMLSelectElement>(null);
 
   const markDirty = useCallback(() => {
     isDirtyRef.current = true;
