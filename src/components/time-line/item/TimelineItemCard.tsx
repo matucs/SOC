@@ -1,10 +1,9 @@
-import React from 'react';
 import type { TimelineItemCardProps } from '../types/Timeline.types';
 import { TypeBadge, SeverityBadge } from '../../ui/Badge';
-import { useFocusWhen } from '../../../hooks/useFocusWhen';
 import { itemAriaLabel, LOCATION_PREFIX } from '../strings/TimelineItem.strings';
+import { getInitialTabIndex } from '../utils/timelineGroup.utils';
 import {
-  getItemCardClass,
+  itemCardClass,
   itemCardStyle,
   itemHeaderRowClass,
   itemTitleClass,
@@ -13,38 +12,34 @@ import {
   itemLocationClass,
 } from '../styles/TimelineItem.styles';
 
-export const TimelineItemCard: React.FC<TimelineItemCardProps> = ({
+export const TimelineItemCard = ({
   event,
   relativeTime,
-  isFocused,
-  onFocus,
+  groupIndex,
+  itemIndex,
+  registerNode,
   onKeyDown,
-}) => {
-  const cardRef = useFocusWhen<HTMLDivElement>(isFocused);
-
-  return (
-    <div
-      ref={cardRef}
-      role="article"
-      tabIndex={isFocused ? 0 : -1}
-      onFocus={onFocus}
-      onKeyDown={onKeyDown}
-      aria-label={itemAriaLabel(event.title, event.severity, event.location, relativeTime)}
-      className={getItemCardClass(isFocused)}
-      style={itemCardStyle}
-    >
-      <div className={itemHeaderRowClass}>
-        <p className={itemTitleClass}>{event.title}</p>
-        <span className={itemTimeClass}>{relativeTime}</span>
-      </div>
-
-      <div className={itemTagsRowClass}>
-        <TypeBadge type={event.type} />
-        <SeverityBadge severity={event.severity} />
-        <span className={itemLocationClass}>
-          {LOCATION_PREFIX} {event.location}
-        </span>
-      </div>
+}: TimelineItemCardProps) => (
+  <div
+    ref={(el) => registerNode(groupIndex, itemIndex, el)}
+    role="article"
+    tabIndex={getInitialTabIndex(groupIndex, itemIndex)}
+    onKeyDown={onKeyDown}
+    aria-label={itemAriaLabel(event.title, event.severity, event.location, relativeTime)}
+    className={itemCardClass}
+    style={itemCardStyle}
+  >
+    <div className={itemHeaderRowClass}>
+      <p className={itemTitleClass}>{event.title}</p>
+      <span className={itemTimeClass}>{relativeTime}</span>
     </div>
-  );
-};
+
+    <div className={itemTagsRowClass}>
+      <TypeBadge type={event.type} />
+      <SeverityBadge severity={event.severity} />
+      <span className={itemLocationClass}>
+        {LOCATION_PREFIX} {event.location}
+      </span>
+    </div>
+  </div>
+);

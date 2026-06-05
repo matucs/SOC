@@ -9,8 +9,7 @@ export const TimelineItem = memo(function TimelineItem({
   event,
   itemIndex,
   groupIndex,
-  isFocused,
-  onItemFocus,
+  registerNode,
   onKeyDown,
 }: TimelineItemProps) {
   const relativeTime = formatRelativeTime(event.timestamp);
@@ -21,8 +20,9 @@ export const TimelineItem = memo(function TimelineItem({
       <TimelineItemCard
         event={event}
         relativeTime={relativeTime}
-        isFocused={isFocused}
-        onFocus={() => onItemFocus(groupIndex, itemIndex)}
+        groupIndex={groupIndex}
+        itemIndex={itemIndex}
+        registerNode={registerNode}
         onKeyDown={onKeyDown}
       />
     </div>

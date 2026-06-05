@@ -1,4 +1,3 @@
-import React from 'react';
 import type { TimelineItemDotProps } from '../types/Timeline.types';
 import {
   itemDotColClass,
@@ -7,7 +6,7 @@ import {
   getSeverityDotStyle,
 } from '../styles/TimelineItem.styles';
 
-export const TimelineItemDot: React.FC<TimelineItemDotProps> = ({ severity }) => (
+export const TimelineItemDot = ({ severity }: TimelineItemDotProps) => (
   <div className={itemDotColClass} style={itemDotColStyle}>
     <div className={itemDotClass} style={getSeverityDotStyle(severity)} />
   </div>

@@ -16,16 +16,6 @@ export interface TimelineEmptyProps {
   message?: string;
 }
 
-export interface UseTimelineReturn {
-  groups: TimelineGroupData[];
-  focusedGroup: number;
-  focusedItem: number;
-  announcement: string;
-  handleGroupKeyDown: (e: React.KeyboardEvent) => void;
-  handleItemFocus: (groupIndex: number, itemIndex: number) => void;
-  handleGroupFocus: (groupIndex: number) => void;
-}
-
 // ── TimelineGroup ─────────────────────────────────────────────────────────────
 export interface TimelineGroupData {
   date: string;
@@ -33,30 +23,31 @@ export interface TimelineGroupData {
   items: SecurityEvent[];
 }
 
+export type TimelineRegisterNode = (
+  groupIndex: number,
+  itemIndex: number,
+  el: HTMLElement | null,
+) => void;
+
 export interface TimelineGroupProps {
   group: TimelineGroupData;
   groupIndex: number;
-  isFocused: boolean;
-  focusedItem: number;
+  registerNode: TimelineRegisterNode;
   onKeyDown: (e: React.KeyboardEvent) => void;
-  onItemFocus: (groupIndex: number, itemIndex: number) => void;
-  onGroupFocus: (groupIndex: number) => void;
 }
 
 export interface TimelineGroupItemsProps {
   group: TimelineGroupData;
   groupIndex: number;
-  isFocused: boolean;
-  focusedItem: number;
+  registerNode: TimelineRegisterNode;
   onKeyDown: (e: React.KeyboardEvent) => void;
-  onItemFocus: (groupIndex: number, itemIndex: number) => void;
 }
 
 export interface TimelineGroupHeaderProps {
   label: string;
   itemCount: number;
-  isHeaderFocused: boolean;
-  onFocus: () => void;
+  groupIndex: number;
+  registerNode: TimelineRegisterNode;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
@@ -69,8 +60,7 @@ export interface TimelineItemProps {
   event: SecurityEvent;
   itemIndex: number;
   groupIndex: number;
-  isFocused: boolean;
-  onItemFocus: (groupIndex: number, itemIndex: number) => void;
+  registerNode: TimelineRegisterNode;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
@@ -81,12 +71,13 @@ export interface TimelineItemDotProps {
 export interface TimelineItemCardProps {
   event: SecurityEvent;
   relativeTime: string;
-  isFocused: boolean;
-  onFocus: () => void;
+  groupIndex: number;
+  itemIndex: number;
+  registerNode: TimelineRegisterNode;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
-// ── useTimelineKeyboard ───────────────────────────────────────────────────────
+// ── Timeline navigation ───────────────────────────────────────────────────────
 export interface TimelineNavItem {
   id: string;
   title: string;
@@ -105,10 +96,3 @@ export interface TimelineFocusPosition {
   item: number;
 }
 
-export interface UseTimelineKeyboardReturn {
-  focusedGroup: number;
-  focusedItem: number;
-  announcement: string;
-  handleKeyDown: (e: React.KeyboardEvent, groups: TimelineNavGroup[]) => void;
-  setFocus: (group: number, item: number, groups: TimelineNavGroup[]) => void;
-}

@@ -1,16 +1,13 @@
 import { memo } from 'react';
 import type { TimelineGroupItemsProps } from '../types/Timeline.types';
 import { TimelineItem } from '../item';
-import { isTimelineItemFocused } from '../utils/timelineGroup.utils';
 import { TimelineGroupLine } from './TimelineGroupLine';
 import { groupItemsClass } from '../styles/TimelineGroup.styles';
 
 export const TimelineGroupItems = memo(function TimelineGroupItems({
   group,
   groupIndex,
-  isFocused,
-  focusedItem,
-  onItemFocus,
+  registerNode,
   onKeyDown,
 }: TimelineGroupItemsProps) {
   return (
@@ -22,8 +19,7 @@ export const TimelineGroupItems = memo(function TimelineGroupItems({
           event={event}
           itemIndex={itemIndex}
           groupIndex={groupIndex}
-          isFocused={isTimelineItemFocused(isFocused, focusedItem, itemIndex)}
-          onItemFocus={onItemFocus}
+          registerNode={registerNode}
           onKeyDown={onKeyDown}
         />
       ))}

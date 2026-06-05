@@ -8,9 +8,8 @@ import {
 } from '../constants/TimelineGroup.constants';
 
 export const groupContainerClass = 'mb-6';
-export const groupHeaderBaseClass =
-  'flex items-center gap-3 mb-3 px-1 py-1.5 rounded transition-colors focus:outline-none focus:ring-1 focus:ring-cyan-500/40';
-export const groupHeaderFocusedClass = 'bg-cyan-500/5';
+export const groupHeaderClass =
+  'flex items-center gap-3 mb-3 px-1 py-1.5 rounded transition-colors focus:outline-none focus:ring-1 focus:ring-cyan-500/40 focus:bg-cyan-500/5';
 export const groupLabelClass =
   'text-[10px] sm:text-xs font-semibold uppercase tracking-widest font-mono truncate';
 export const groupDividerClass = 'flex-1 h-px';
@@ -30,5 +29,3 @@ export const groupLineStyle = {
   background: GROUP_LINE_GRADIENT,
 };
 
-export const getGroupHeaderClass = (isHeaderFocused: boolean) =>
-  `${groupHeaderBaseClass} ${isHeaderFocused ? groupHeaderFocusedClass : ''}`;

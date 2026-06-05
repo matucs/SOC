@@ -1,22 +1,20 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import type { TimelineProps } from './types/Timeline.types';
 import { TimelineGroup } from './group';
 import { TimelineHeader } from './header';
 import { TimelineEmpty } from './empty';
-import { useTimeline } from './hooks/useTimeline';
+import { useTimelineFocus } from './hooks/useTimelineFocus';
+import { groupByDay } from './utils/timeline.utils';
 import { ARIA_TIMELINE } from './strings/Timeline.strings';
-import { timelineContainerClass, timelineLiveRegionClass, timelineScrollClass } from './styles/Timeline.styles';
+import {
+  timelineContainerClass,
+  timelineLiveRegionClass,
+  timelineScrollClass,
+} from './styles/Timeline.styles';
 
 export const Timeline = memo(function Timeline({ events }: TimelineProps) {
-  const {
-    groups,
-    focusedGroup,
-    focusedItem,
-    announcement,
-    handleGroupKeyDown,
-    handleItemFocus,
-    handleGroupFocus,
-  } = useTimeline(events);
+  const groups = useMemo(() => groupByDay(events), [events]);
+  const { registerNode, handleKeyDown, liveRegionRef } = useTimelineFocus(groups);
 
   if (events.length === 0) {
     return <TimelineEmpty />;
@@ -24,9 +22,12 @@ export const Timeline = memo(function Timeline({ events }: TimelineProps) {
 
   return (
     <section aria-label={ARIA_TIMELINE} className={timelineContainerClass}>
-      <div aria-live="polite" aria-atomic="true" className={timelineLiveRegionClass}>
-        {announcement}
-      </div>
+      <div
+        ref={liveRegionRef}
+        aria-live="polite"
+        aria-atomic="true"
+        className={timelineLiveRegionClass}
+      />
 
       <TimelineHeader eventCount={events.length} groupCount={groups.length} />
 
@@ -36,11 +37,8 @@ export const Timeline = memo(function Timeline({ events }: TimelineProps) {
             key={group.date}
             group={group}
             groupIndex={gi}
-            isFocused={focusedGroup === gi}
-            focusedItem={focusedGroup === gi ? focusedItem : -1}
-            onKeyDown={handleGroupKeyDown}
-            onItemFocus={handleItemFocus}
-            onGroupFocus={handleGroupFocus}
+            registerNode={registerNode}
+            onKeyDown={handleKeyDown}
           />
         ))}
       </div>

@@ -1,14 +1,14 @@
-import type { Dispatch, SetStateAction } from 'react';
 import type { TimelineNavGroup, TimelineNavItem } from '../types/Timeline.types';
 import { announceGroup, announceItem } from '../strings/Timeline.strings';
 import { GROUP_HEADER_FOCUS } from '../constants/TimelineGroup.constants';
 
-export function scheduleAnnouncement(
-  setAnnouncement: Dispatch<SetStateAction<string>>,
-  message: string,
-): void {
-  setAnnouncement('');
-  requestAnimationFrame(() => setAnnouncement(message));
+export function scheduleAnnouncement(liveRegion: HTMLElement | null, message: string): void {
+  if (!liveRegion) return;
+
+  liveRegion.textContent = '';
+  requestAnimationFrame(() => {
+    liveRegion.textContent = message;
+  });
 }
 
 function announceGroupFocus(group: TimelineNavGroup): string {
